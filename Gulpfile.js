@@ -1,6 +1,7 @@
-var gulp = require('gulp');
-var sass = require('gulp-sass');
+var gulp      = require('gulp');
+var sass      = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
+var concat    = require('gulp-concat');
 
 gulp.task('styles', function() {
   gulp.src('sass/**/*.scss')
@@ -9,8 +10,9 @@ gulp.task('styles', function() {
 });
 
 gulp.task('compress', function() {
-  return gulp.src('./css/*.css')
+  gulp.src('css/*.css')
     .pipe(minifyCss({compatibility: 'ie8'}))
+    .pipe(concat('all.min.css'))
     .pipe(gulp.dest('dist'));
 })
 
